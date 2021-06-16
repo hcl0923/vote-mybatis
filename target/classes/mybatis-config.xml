@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 1.使用properties引入外部properties配置文件中的内容
+resource ：引入类路径-->
+<properties resource="db.properties"></properties>
+<!-- 2.settings包含了很多重要信息 
+mapUnderscoreToCamelCase 	
+是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn。 	
+true | false -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+  <environments default="dev_mysql">
+    <environment id="dev_mysql">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${mysql.driver}"/>
+        <property name="url" value="${mysql.url}"/>
+        <property name="username" value="${mysql.user}"/>
+        <property name="password" value="${mysql.password}"/>
+      </dataSource>
+    </environment>
+     <environment id="dev_oracle">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${oracle.driver}"/>
+        <property name="url" value="${oracle.url}"/>
+        <property name="username" value="${oracle.user}"/>
+        <property name="password" value="${oracle.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <!-- MyBatis 可以根据不同的数据库厂商执行不同的语句，这种多厂商的支持是基于映射语句中的 databaseId 属性。 MyBatis 会加载带有匹配当前数据库 databaseId 属性和所有不带 databaseId 属性的语句。 如果同时找到带有 databaseId 和不带 databaseId 的相同语句，则后者会被舍弃。 为支持多厂商特性，只要像下面这样在 mybatis-config.xml 文件中加入 databaseIdProvider 即可：  -->
+  <databaseIdProvider type="DB_VENDOR">
+	  <property name="SQL Server" value="sqlserver"/>
+	  <property name="MySQL" value="mysql"/>
+	  <property name="Oracle" value="oracle" />
+	</databaseIdProvider>
+  <!-- 将写好的sql映射文件 一定要注册到全局配置文件中去 -->
+  <mappers>
+    <!-- <mapper resource="com/yc/dao/UserMapper.xml"/> -->
+    <package name="com.yc.dao"/>
+  </mappers>
+</configuration>

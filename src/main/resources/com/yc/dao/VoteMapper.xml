@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- namespace 空间名称  接口的全路径名称  -->
+<mapper namespace="com.yc.dao.VoteMapper">
+	<!-- public int add(Vote t); -->
+	<insert id="add" parameterType="com.yc.bean.Vote">
+		insert into tb_vote values (#{vid},#{vname},#{vtype},#{startDate},#{endDate})
+	</insert>
+	
+</mapper>

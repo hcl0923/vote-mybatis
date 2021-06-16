@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- namespace 空间名称  接口的全路径名称  -->
+<mapper namespace="com.yc.dao.OptionMapper">
+	<!-- public List<Option> findByTrem(Option t); -->
+	<!-- public int addOptions(@Param("options")List<String> option,@Param("vid")String vid); -->
+	<insert id="addOptions">
+		insert into tb_options (vid,opname,views,usid) values
+		<foreach collection="options" item="opname" separator=",">
+			(#{vid},#{opname},0,null)
+		</foreach>
+	</insert>
+	
+</mapper>

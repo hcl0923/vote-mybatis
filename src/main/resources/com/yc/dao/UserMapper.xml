@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- namespace 空间名称  接口的全路径名称  -->
+<mapper namespace="com.yc.dao.UserMapper">
+	<!-- public int add(User t); -->
+	<insert id="add" parameterType="com.yc.bean.User">
+		insert into tb_user values(null,#{uname},MD5(#{pwd}))
+	</insert>
+	<!-- public List<User> findByTrem(User t); -->
+	<select id= "findByTrem" resultType="com.yc.bean.User">
+		select usid,uname,pwd from tb_user
+		<where>
+			<if test="null!=usid">
+				and usid =#{usid}
+			</if>
+			<if test="null!=uname and uname neq &quot;&quot;">
+				and uname =#{uname}
+			</if>
+			<if test="null!=pwd and pwd neq &quot;&quot;"> 
+				and pwd =MD5(#{pwd})
+			</if>
+		</where>
+	</select>
+</mapper>
